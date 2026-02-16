@@ -12,5 +12,7 @@ public class SigilDrawer: MonoBehaviour
     if(objectName != null){
         //Paste object creation code here
     }
+    foreach (var obj in GameObject.FindGameObjectsWithTag("PrintPrefab"))
+    Destroy(obj);
     }
 }
