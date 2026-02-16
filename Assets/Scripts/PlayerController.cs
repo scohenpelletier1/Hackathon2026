@@ -73,8 +73,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void OnTriggerEnter2D(Collider2D collision) {
+        // is it a spring?
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Spring") && isGrounded)
+        {
+            // rb.AddForceY(jumpForce * 2);
+            rb.linearVelocityY = jumpForce * 2;
+            isGrounded = false;
+        }
 
-
-
+    }
 
 }
