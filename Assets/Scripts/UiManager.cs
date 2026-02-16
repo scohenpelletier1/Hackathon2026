@@ -5,6 +5,7 @@ public class UiManager : MonoBehaviour{
     public void openPrinter(){
         sigilParent.SetActive(true);
     }
+    //we can move this into the character controller when the time comes
     public void Update(){
         if(Input.GetKeyDown(KeyCode.Q)){
             openPrinter();
