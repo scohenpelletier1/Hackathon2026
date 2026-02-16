@@ -20,17 +20,22 @@ public class ObjectBehavior : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(UnityEngine.Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && this.CompareTag("Spring") && !collision.gameObject.GetComponent<PlayerController>().isGrounded)
         {
-            // if the collider is a player, change to dynamic
+            print("Hiiiiiiiiiiiiiii");
+            GameObject player = collision.gameObject;
+
+            // if the collider is a player, the object IS a spring, and the player is standing on top of the spring
+            player.GetComponent<Rigidbody2D>().linearVelocityY = player.GetComponent<PlayerController>().jumpForce * 2;
+
+        } else if (collision.gameObject.CompareTag("Player"))
+        {
+            // if the collider is a player and the object is not a spring
             print("player touched me");
             rb.bodyType = RigidbodyType2D.Dynamic;
             isTouchingPlayer = true;
-
-            // give it the same velocity as the player to reduce jitter
-            rb.linearVelocityX = collision.gameObject.GetComponent<Rigidbody2D>().linearVelocityX;
         }
 
     }
