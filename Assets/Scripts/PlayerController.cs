@@ -12,10 +12,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 groundCheckPosition;
     public LayerMask groundLayers;
     public Animator animator;
-    public KeyCode keyToDetect = KeyCode.Q // The key you want to detect
+    public KeyCode keyToDetect = KeyCode.Q; // The key you want to detect
     public float requiredHoldTime = 2.0f; // The required hold duration in seconds
     private float holdTimer = 0.0f;
     private bool heldLongEnough = false;
+    public GameManager garry;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
             if (holdTimer >= requiredHoldTime && !heldLongEnough)
             {
                 Debug.Log("Key held for " + requiredHoldTime + " seconds!");
-                Laser()
+                Laser();
             }
         }
         else
@@ -139,17 +140,17 @@ public class PlayerController : MonoBehaviour
     public void Laser(){
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 100f, LayerMask.GetMask("Objects"));
         if(hit.collider != null){
-            gameObject target = hit.collider.gameObject.name
-            if GameObject.CompareTag("Spring"){
+            GameObject target = hit.collider.gameObject;
+            if (target.CompareTag("Spring")){
                 garry.filament += 2;
             }
-            if GameObject.CompareTag("Grapple"){
+            if (target.CompareTag("Grapple")){
                 garry.filament += 4;
             }
-            if GameObject.CompareTag("Box"){
+            if (target.CompareTag("Box")){
                 garry.filament += 3;
             }
-            if GameObject.CompareTag("Trash"){
+            if (target.CompareTag("Trash")){
                 garry.filament += 1;
             }
             garry.UpdateUI();
