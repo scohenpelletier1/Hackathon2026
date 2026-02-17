@@ -311,7 +311,7 @@ MonoBehaviour:
   sigilParent: {fileID: 1066804501}
   printPrefab: {fileID: 5349481830581247875, guid: c1a3099f04dd0a844b35db9a748d1436, type: 3}
   gridSize: 0.5
-  moveInterval: 0.2
+  moveInterval: 0.5
   isDrawing: 1
 --- !u!212 &712490242
 SpriteRenderer:

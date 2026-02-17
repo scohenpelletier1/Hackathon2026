@@ -34,29 +34,25 @@ public class SigilDrawer: MonoBehaviour
         springGrid[0,10] = true;
         springGrid[20,8]=true;
         //grapple grid initialization (GOD WHEN WILL IT END?)
-        bool[,] grappleData = new bool[,] {
-            {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, true, true, true, true},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
-            {false, false, false, false, false, false, false, true, true, true, true, true, true, true, true},
-            {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
-            {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
-            {true, true, true, true, true, false, false, true, false, false, false, false, false, false, false},
-            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
-            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
-            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
-            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
-            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
-            {true, true, true, true, true, true, true, true, false, false, false, false, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
-        };
+        for(int i = 0; i <7; i++){
+            grappleGrid[i,0] = true;
+            grappleGrid[i,4] = true;
+        }
+        grappleGrid[0,1] = true;
+        grappleGrid[0,2] = true;
+        grappleGrid[0,3] = true;
+        grappleGrid[6,1] = true;
+        grappleGrid[6,2] = true;
+        grappleGrid[6,3] = true;
+        for(int i=7; i<10; i++){
+            grappleGrid[i,4] = true;
+        }
+        for(int i=10; i<16; i++){
+            grappleGrid[i,4] = true;
+            grappleGrid[i,7] = true;
+        }
+        grappleGrid[15,5] = true;
+        grappleGrid[15,6] = true;
     }
     //When the time comes, add the ability to set a starting location for the head
     public void StartPrinting(){
@@ -75,10 +71,10 @@ public class SigilDrawer: MonoBehaviour
                 }
                 if(springGrid[i,e] != grid[i,e]){
                     isSpring = false;
-                    Debug.Log(i+","+e+" is wrong for Spring");
                 }
                 if(grappleGrid[i,e] != grid[i,e]){
                     isGrapple = false;
+                    Debug.Log(i+","+e+" is wrong for Grapple");
                 }
             }
         }
@@ -98,7 +94,6 @@ public class SigilDrawer: MonoBehaviour
     public void RecordCell(Vector2 gridPosition){
         int x =(int) ((5+(gridPosition.x))*2);
         int y =(int) ((3.5 + (gridPosition.y*-1))*2);
-        Debug.Log(x+","+y);
         grid[x, y]=true;
 
     }
@@ -128,3 +123,4 @@ public class SigilDrawer: MonoBehaviour
         UiManager.closePrinter();
     }
 }
+
