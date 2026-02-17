@@ -24,7 +24,7 @@ public class UiManager : MonoBehaviour{
         // }
          if(Input.GetKeyDown(KeyCode.Escape)){
             SigilDrawer.StopPrinting();
-
+            garry.hideSTLScreen();
         }
     }
 

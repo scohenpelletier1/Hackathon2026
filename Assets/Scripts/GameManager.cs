@@ -13,6 +13,13 @@ public class GameManager : MonoBehaviour
     public Image filamentImage;
     public Canvas canvas;
     public GameObject errorMessage;
+    public Image STLScreen;
+    public Image BoxScreen;
+    public Image SpringScreen;
+    public Image GrappleScreen;
+    public bool foundBox = false;
+    public bool foundSpring = false;
+    public bool foundGrapple = false;
 
     void Awake() {
         // check for the singleton
@@ -84,5 +91,44 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         errorMessage.SetActive(false);
     }
+    public void showSTLScreen(){
+        // Delegate to Gary singleton if this is not Gary
+        if (this != Gary && Gary != null) {
+            Gary.showSTLScreen();
+            return;
+        }
+        STLScreen.gameObject.SetActive(true);
+        if(foundBox){
+            BoxScreen.gameObject.SetActive(true);
+        }
+        else{
+            BoxScreen.gameObject.SetActive(false);
+        }
+        if(foundSpring){
+            SpringScreen.gameObject.SetActive(true);
+        }
+        else{
+            SpringScreen.gameObject.SetActive(false);
+        }
+        if(foundGrapple){
+            GrappleScreen.gameObject.SetActive(true);
+        }
+        else{
+            GrappleScreen.gameObject.SetActive(false);
+        }
+        
+    }
+    public void hideSTLScreen(){
+        // Delegate to Gary singleton if this is not Gary
+        if (this != Gary && Gary != null) {
+            Gary.hideSTLScreen();
+            return;
+        }
+        STLScreen.gameObject.SetActive(false);
+        BoxScreen.gameObject.SetActive(false);
+        SpringScreen.gameObject.SetActive(false);
+        GrappleScreen.gameObject.SetActive(false);
+    }
+
     
 }
