@@ -1,7 +1,12 @@
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 public class SigilDrawer: MonoBehaviour
 {
+    // will add the others once finished
+    [SerializeField] private GameObject phantomBox;
+    [SerializeField] private GameObject phantomTrash;
+
     const int gridHeight = 15;
     const int gridWidth = 21;
     bool[,] grid = new bool[gridWidth, gridHeight];
@@ -11,6 +16,9 @@ public class SigilDrawer: MonoBehaviour
     public UiManager UiManager;
     public PrintController PrintController;
     void Start(){
+        // game manager turns movement off
+        GameManager.Gary.currentState = GameState.SnakeGame;
+        
         //box grid initialization
         for(int i=10; i<gridWidth; i += 10){
             for(int e=7; e<gridHeight; e++){
@@ -99,20 +107,28 @@ public class SigilDrawer: MonoBehaviour
     }
     private void CompleteSigil(int objectNumber){
         Debug.Log("objectNumber: " + objectNumber);
-    if(objectNumber == 1){
-        Debug.Log("Box");
-    }
-    else if(objectNumber == 2){
-        Debug.Log("Spring");
-    }
-    else if(objectNumber == 3){
-        Debug.Log("Grapple");
-    }
-    else{
-        Debug.Log("Trash");
-    }
-    StopPrinting();
-    UiManager.closePrinter();
+        if(objectNumber == 1){
+            // create box
+            GameObject box = Instantiate(phantomBox);
+
+        }
+        else if(objectNumber == 2){
+            Debug.Log("Spring");
+        }
+        else if(objectNumber == 3){
+            Debug.Log("Grapple");
+        }
+        else{
+            // create trash
+            GameObject trash = Instantiate(phantomTrash);
+        }
+
+        StopPrinting();
+        UiManager.closePrinter();
+
+        // allow player to move again
+        GameManager.Gary.currentState = GameState.Playing;
+
     }
     public void StopPrinting(){
         foreach (var obj in GameObject.FindGameObjectsWithTag("PrintPrefab")){
