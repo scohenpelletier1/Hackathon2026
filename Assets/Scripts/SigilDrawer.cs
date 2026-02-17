@@ -8,6 +8,8 @@ public class SigilDrawer: MonoBehaviour
     bool[,] boxGrid = new bool[gridWidth, gridHeight];
     bool[,] springGrid = new bool[gridWidth, gridHeight];
     bool[,] grappleGrid = new bool[gridWidth, gridHeight];
+    public UiManager UiManager;
+    public PrintController PrintController;
     void Start(){
         //box grid initialization
         for(int i=10; i<gridWidth; i += 10){
@@ -21,9 +23,9 @@ public class SigilDrawer: MonoBehaviour
 
         }
     }
-    //we should use this eventually so when you press a button, it starts after a delay
+    //When the time comes, add the ability to set a starting location for the head
     public void StartPrinting(){
-        Time.timeScale = 0;
+        PrintController.isDrawing = true;
     }
     public void CompareDrawing(){
         //compare the drawing to the preset print codes
@@ -60,7 +62,6 @@ public class SigilDrawer: MonoBehaviour
         int x =(int) ((5+(gridPosition.x))*2);
         int y =(int) ((3.5 + (gridPosition.y*-1))*2);
         grid[x, y]=true;
-        Debug.Log("Recorded cell: " + x + ", " + y);
 
     }
     private void CompleteSigil(int objectNumber){
@@ -77,8 +78,14 @@ public class SigilDrawer: MonoBehaviour
     else{
         Debug.Log("Trash");
     }
-    foreach (var obj in GameObject.FindGameObjectsWithTag("PrintPrefab")){
+    StopPrinting();
+    UiManager.closePrinter();
+    }
+    public void StopPrinting(){
+        foreach (var obj in GameObject.FindGameObjectsWithTag("PrintPrefab")){
         Destroy(obj);
     }
+        bool[,] grid = new bool[gridWidth, gridHeight];
+        PrintController.resetPrinterHead();
     }
 }

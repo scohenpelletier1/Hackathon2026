@@ -7,7 +7,7 @@ public class PrintController : MonoBehaviour
     public float gridSize = 1f;
     public float moveInterval = 0.2f; // seconds between moves
     private bool moveLock = false;
-    public bool isDrawing = true;
+    public bool isDrawing = false;
     private Vector2 direction = Vector2.right;
     private Vector3 prefabPosition;
     private float moveTimer;
@@ -58,5 +58,9 @@ public class PrintController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         isDrawing = false;
         sigilDrawer.CompareDrawing();
+        resetPrinterHead();
+    }
+    public void resetPrinterHead(){
+        transform.position = sigilParent.transform.position;
     }
 }

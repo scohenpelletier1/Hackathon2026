@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48040760e6365cb4193de6bfcb595918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SigilDrawer: {fileID: 0}
   sigilParent: {fileID: 1066804501}
 --- !u!1 &1066804501
 GameObject:
@@ -563,7 +564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1066804502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -597,6 +598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dee043269de494597e19e69cb86cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UiManager: {fileID: 766551588}
+  PrintController: {fileID: 0}
 --- !u!1 &1672602671
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,11 @@
 using UnityEngine;
 public class UiManager : MonoBehaviour{
-    [SerializeField] private GameObject sigilParent;
+    [SerializeField] private SigilDrawer SigilDrawer;
+    public GameObject sigilParent;
     //Call this function when you hit the print button
     public void openPrinter(){
         sigilParent.SetActive(true);
+        SigilDrawer.StartPrinting();
     }
     //we can move this into the character controller when the time comes
     public void Update(){
@@ -11,7 +13,7 @@ public class UiManager : MonoBehaviour{
             openPrinter();
         }
          if(Input.GetKeyDown(KeyCode.Escape)){
-            closePrinter();
+            SigilDrawer.StopPrinting();
         }
     }
     public void closePrinter(){
