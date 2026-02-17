@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
         if (colliders.Length > 0)
         {
             isGrounded = true;
+            animator.SetBool("isGrounded", true);
         }
 
     }
@@ -83,6 +84,17 @@ public class PlayerController : MonoBehaviour
             // we are jumping
             rb.linearVelocityY = jumpForce;
             isGrounded = false;
+            animator.SetBool("isGrounded", false);
+
+            if (isLeft)
+            {
+                animator.Play("PlayerJumpLeft");
+
+            } else
+            {
+                animator.Play("PlayerJumpRight");
+            }
+
         }
 
     }
