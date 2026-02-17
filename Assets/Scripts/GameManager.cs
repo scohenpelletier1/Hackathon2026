@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public void UpdateUI() {
         // update all UI values
         int filamentImageCount = GameObject.FindGameObjectsWithTag("FilamentImage").Length;
+        Debug.Log("filamentImageCount: " + filamentImageCount);
         // for filament
         if(filamentImageCount < filament){
             for (int i = 1; i < filament; i++)

@@ -117,7 +117,6 @@ public class SigilDrawer: MonoBehaviour
             if(garry.filament >= 3){
                 GameObject box = Instantiate(phantomBox);
                 garry.filament -= 3;
-                garry.UpdateUI();
             }
             else{
                 garry.showErrorMessage();
@@ -128,7 +127,6 @@ public class SigilDrawer: MonoBehaviour
             if(garry.filament >= 2){
             GameObject spring = Instantiate(phantomSpring);
             garry.filament -= 2;
-            garry.UpdateUI();
             }
             else{
                 garry.showErrorMessage();
@@ -138,7 +136,6 @@ public class SigilDrawer: MonoBehaviour
             if(garry.filament >= 4){
             GameObject grapple = Instantiate(phantomGrapple);
             garry.filament -= 4;
-            garry.UpdateUI();
             }
             else{
                 garry.showErrorMessage();
@@ -149,11 +146,11 @@ public class SigilDrawer: MonoBehaviour
             if(garry.filament >= 1){
             GameObject trash = Instantiate(phantomTrash);
             garry.filament -= 1;
-            garry.UpdateUI();
             }
             else{
                 garry.showErrorMessage();
             }
+            garry.UpdateUI();
         }
 
         // allow player to move again

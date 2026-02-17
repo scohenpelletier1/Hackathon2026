@@ -3,7 +3,7 @@ using UnityEngine;
 public class GrappleHook : MonoBehaviour
 {
     public float pullSpeed = 25f;
-    public float arrivalDistance = 0.5f;
+    public float arrivalDistance = 1.5f;
     public LayerMask groundLayer;
     private Transform player;
     private Rigidbody2D playerRb;
@@ -34,6 +34,13 @@ public class GrappleHook : MonoBehaviour
     {
         if (isPulling && player != null)
         {
+            // Stop pulling when player presses E
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StopPulling();
+                return;
+            }
+            
             PullPlayer();
         }
     }

@@ -137,6 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868f813ea65cc41f3aaf6d0dcdf451f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nonPhantomObject: {fileID: 0}
+  nonPhantomObject: {fileID: 917687777508122915, guid: 37a8d149421d8eb45a11d91fe71ca4a6, type: 3}
   nonPhantomObjectName: Grapple
   mainCamera: {fileID: 0}
