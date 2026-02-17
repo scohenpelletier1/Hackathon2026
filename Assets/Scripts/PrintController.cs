@@ -2,6 +2,7 @@ using UnityEngine;
 public class PrintController : MonoBehaviour
 {
     [SerializeField] private SigilDrawer sigilDrawer;
+    public GameObject sigilParent;
     public GameObject printPrefab;
     public float gridSize = 1f;
     public float moveInterval = 0.2f; // seconds between moves
@@ -50,6 +51,8 @@ public class PrintController : MonoBehaviour
     {
         prefabPosition = transform.position;
         transform.position += (Vector3)(direction * gridSize);
+        Vector2 prefabGridPosition = new Vector2(prefabPosition.x-sigilParent.transform.position.x, prefabPosition.y-sigilParent.transform.position.y);
+        sigilDrawer.RecordCell(prefabGridPosition);
         Instantiate(printPrefab, prefabPosition, Quaternion.identity);
     }
     void OnTriggerEnter2D(Collider2D other){
