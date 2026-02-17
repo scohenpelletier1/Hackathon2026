@@ -100,6 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868f813ea65cc41f3aaf6d0dcdf451f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nonPhantomObject: {fileID: 0}
+  nonPhantomObject: {fileID: 8608111989407413184, guid: 80608352398fd4676befb47ab6357662, type: 3}
   nonPhantomObjectName: Junk
   mainCamera: {fileID: 0}

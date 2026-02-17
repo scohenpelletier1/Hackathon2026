@@ -1,7 +1,12 @@
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 public class SigilDrawer: MonoBehaviour
 {
+    // will add the others once finished
+    [SerializeField] private GameObject phantomBox;
+    [SerializeField] private GameObject phantomTrash;
+
     const int gridHeight = 15;
     const int gridWidth = 21;
     bool[,] grid = new bool[gridWidth, gridHeight];
@@ -68,6 +73,8 @@ public class SigilDrawer: MonoBehaviour
         Debug.Log("objectNumber: " + objectNumber);
     if(objectNumber == 1){
         Debug.Log("Box");
+        GameObject box = Instantiate(phantomBox);
+
     }
     else if(objectNumber == 2){
         Debug.Log("Spring");
@@ -77,6 +84,7 @@ public class SigilDrawer: MonoBehaviour
     }
     else{
         Debug.Log("Trash");
+        GameObject trash = Instantiate(phantomTrash);
     }
     StopPrinting();
     UiManager.closePrinter();
