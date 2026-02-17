@@ -62,5 +62,7 @@ public class PrintController : MonoBehaviour
     }
     public void resetPrinterHead(){
         transform.position = sigilParent.transform.position;
+        isDrawing = false;
+        direction = Vector2.right;
     }
 }

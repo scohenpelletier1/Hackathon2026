@@ -17,28 +17,22 @@ public class SigilDrawer: MonoBehaviour
                 boxGrid[i,e] = true;
         }
         }
-        for(int i=11; i<gridWidth; i ++){
+        for(int i=10; i<gridWidth; i ++){
             boxGrid[i,7] = true;
             boxGrid[i, 14] = true;
         }
-        //spring grid initialization (god help us all)
-        bool[,] springData = new bool[,] {
-            {true, true, true, true, true, true, true, true, true, true, false, false, true, true, true},
-            {true, false, false, false, false, false, false, false, false, true, false, false, true, false, true},
-            {true, false, false, true, true, true, true, false, false, true, false, false, true, false, true},
-            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
-            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
-            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
-            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
-            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
-            {true, false, false, true, false, false, true, false, false, true, true, true, true, false, true},
-            {true, true, true, false, false, true, true, true, true, true, true, true, true, true, true}
-        };
-        for(int i = 0; i < 10; i++){
-            for(int e = 0; e < 15; e++){
-                springGrid[i + 7, e] = springData[i, e];
-            }
+        //spring grid initialization
+        for(int i = 10; i<gridWidth; i++){
+            springGrid[i,7] = true;
+            springGrid[i,9] = true;
+            springGrid[i,11] = true;
         }
+        for(int i=0; i<11; i++){
+            springGrid[i,9] = true;
+            springGrid[i,11] = true;
+        }
+        springGrid[0,10] = true;
+        springGrid[20,8]=true;
         //grapple grid initialization (GOD WHEN WILL IT END?)
         bool[,] grappleData = new bool[,] {
             {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false},
@@ -60,11 +54,13 @@ public class SigilDrawer: MonoBehaviour
             {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
             {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
             {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
             {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
         };
     }
     //When the time comes, add the ability to set a starting location for the head
     public void StartPrinting(){
+        PrintController.resetPrinterHead();
         PrintController.isDrawing = true;
     }
     public void CompareDrawing(){
@@ -79,6 +75,7 @@ public class SigilDrawer: MonoBehaviour
                 }
                 if(springGrid[i,e] != grid[i,e]){
                     isSpring = false;
+                    Debug.Log(i+","+e+" is wrong for Spring");
                 }
                 if(grappleGrid[i,e] != grid[i,e]){
                     isGrapple = false;
@@ -101,6 +98,7 @@ public class SigilDrawer: MonoBehaviour
     public void RecordCell(Vector2 gridPosition){
         int x =(int) ((5+(gridPosition.x))*2);
         int y =(int) ((3.5 + (gridPosition.y*-1))*2);
+        Debug.Log(x+","+y);
         grid[x, y]=true;
 
     }
@@ -124,8 +122,9 @@ public class SigilDrawer: MonoBehaviour
     public void StopPrinting(){
         foreach (var obj in GameObject.FindGameObjectsWithTag("PrintPrefab")){
         Destroy(obj);
-    }
+        }
         bool[,] grid = new bool[gridWidth, gridHeight];
         PrintController.resetPrinterHead();
+        UiManager.closePrinter();
     }
 }
