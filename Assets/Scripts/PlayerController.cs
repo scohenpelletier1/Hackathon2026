@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             MovePlayer();
         }
+
         // Check if the key is currently held down
         if (Input.GetKey(keyToDetect))
         {
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Key held for " + requiredHoldTime + " seconds!");
                 Laser();
             }
+            
         }
         else
         {
