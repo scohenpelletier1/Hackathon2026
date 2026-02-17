@@ -6,6 +6,8 @@ public class SigilDrawer: MonoBehaviour
     // will add the others once finished
     [SerializeField] private GameObject phantomBox;
     [SerializeField] private GameObject phantomTrash;
+    [SerializeField] private GameObject phantomSpring;
+    [SerializeField] private GameObject phantomGrapple;
 
     const int gridHeight = 15;
     const int gridWidth = 21;
@@ -15,6 +17,7 @@ public class SigilDrawer: MonoBehaviour
     bool[,] grappleGrid = new bool[gridWidth, gridHeight];
     public UiManager UiManager;
     public PrintController PrintController;
+    public GameManager garry;
     void Start(){
         // game manager turns movement off
         GameManager.Gary.currentState = GameState.SnakeGame;
@@ -65,6 +68,7 @@ public class SigilDrawer: MonoBehaviour
     //When the time comes, add the ability to set a starting location for the head
     public void StartPrinting(){
         PrintController.resetPrinterHead();
+        PrintController.CalculateOffset();
         PrintController.isDrawing = true;
     }
     public void CompareDrawing(){
@@ -76,13 +80,13 @@ public class SigilDrawer: MonoBehaviour
             for(int e=0; e<gridHeight; e++){
                 if(boxGrid[i,e] != grid[i,e]){
                     isBox = false;
+                    Debug.Log(i+","+e+" is wrong for Box");
                 }
                 if(springGrid[i,e] != grid[i,e]){
                     isSpring = false;
                 }
                 if(grappleGrid[i,e] != grid[i,e]){
                     isGrapple = false;
-                    Debug.Log(i+","+e+" is wrong for Grapple");
                 }
             }
         }
@@ -100,31 +104,57 @@ public class SigilDrawer: MonoBehaviour
         }
     }
     public void RecordCell(Vector2 gridPosition){
-        int x =(int) ((5+(gridPosition.x))*2);
-        int y =(int) ((3.5 + (gridPosition.y*-1))*2);
+        int x = Mathf.RoundToInt((5.0f + gridPosition.x) * 2.0f);
+        int y = Mathf.RoundToInt((3.5f + (gridPosition.y * -1.0f)) * 2.0f);
         grid[x, y]=true;
-
     }
     private void CompleteSigil(int objectNumber){
         Debug.Log("objectNumber: " + objectNumber);
+        StopPrinting();
+        UiManager.closePrinter();
         if(objectNumber == 1){
             // create box
-            GameObject box = Instantiate(phantomBox);
+            if(garry.filament >= 3){
+                GameObject box = Instantiate(phantomBox);
+                garry.filament -= 3;
+                garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
 
         }
         else if(objectNumber == 2){
-            Debug.Log("Spring");
+            if(garry.filament >= 2){
+            GameObject spring = Instantiate(phantomSpring);
+            garry.filament -= 2;
+            garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
         }
         else if(objectNumber == 3){
-            Debug.Log("Grapple");
+            if(garry.filament >= 4){
+            GameObject grapple = Instantiate(phantomGrapple);
+            garry.filament -= 4;
+            garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
         }
         else{
             // create trash
+            if(garry.filament >= 1){
             GameObject trash = Instantiate(phantomTrash);
+            garry.filament -= 1;
+            garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
         }
-
-        StopPrinting();
-        UiManager.closePrinter();
 
         // allow player to move again
         GameManager.Gary.currentState = GameState.Playing;
@@ -134,7 +164,7 @@ public class SigilDrawer: MonoBehaviour
         foreach (var obj in GameObject.FindGameObjectsWithTag("PrintPrefab")){
         Destroy(obj);
         }
-        bool[,] grid = new bool[gridWidth, gridHeight];
+        grid = new bool[gridWidth, gridHeight];
         PrintController.resetPrinterHead();
         UiManager.closePrinter();
     }
