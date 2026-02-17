@@ -20,7 +20,24 @@ public class SigilDrawer: MonoBehaviour
         for(int i=11; i<gridWidth; i ++){
             boxGrid[i,7] = true;
             boxGrid[i, 14] = true;
-
+        }
+        //spring grid initialization (god help us all)
+        bool[,] springData = new bool[,] {
+            {true, true, true, true, true, true, true, true, true, true, false, false, true, true, true},
+            {true, false, false, false, false, false, false, false, false, true, false, false, true, false, true},
+            {true, false, false, true, true, true, true, false, false, true, false, false, true, false, true},
+            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
+            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
+            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
+            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
+            {true, false, false, true, false, false, true, false, false, true, false, false, true, false, true},
+            {true, false, false, true, false, false, true, false, false, true, true, true, true, false, true},
+            {true, true, true, false, false, true, true, true, true, true, true, true, true, true, true}
+        };
+        for(int i = 0; i < 10; i++){
+            for(int e = 0; e < 15; e++){
+                springGrid[i + 7, e] = springData[i, e];
+            }
         }
     }
     //When the time comes, add the ability to set a starting location for the head
