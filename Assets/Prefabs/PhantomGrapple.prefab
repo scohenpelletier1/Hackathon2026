@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2755747462903026155}
   - component: {fileID: 1483887154298279368}
   - component: {fileID: 7732742615031097208}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PhantomGrapple
   m_TagString: Untagged
   m_Icon: {fileID: 0}

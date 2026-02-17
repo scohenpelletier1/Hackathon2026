@@ -10,7 +10,7 @@ public class ObjectBehavior : MonoBehaviour
     {
         // get the rigidbody, set type (to dynamic so that it can falllllll)
         rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        // rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class ObjectBehavior : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && this.CompareTag("Spring") && !collision.gameObject.GetComponent<PlayerController>().isGrounded)
+        if (collision.gameObject.CompareTag("Player") && this.CompareTag("Spring"))
         {
             print("Hiiiiiiiiiiiiiii");
             GameObject player = collision.gameObject;
@@ -34,9 +34,14 @@ public class ObjectBehavior : MonoBehaviour
         {
             // if the collider is a player and the object is not a spring
             print("player touched me");
-            rb.bodyType = RigidbodyType2D.Dynamic;
+            // rb.bodyType = RigidbodyType2D.Dynamic;
             isTouchingPlayer = true;
         }
+        if (collision.gameObject.CompareTag("Box") && this.CompareTag("Spring") || collision.gameObject.CompareTag("Trash") && this.CompareTag("Spring")){
+            GameObject box = collision.gameObject;
+            box.GetComponent<Rigidbody2D>().linearVelocityY = 8;
+        }
+
 
     }
 
@@ -46,7 +51,7 @@ public class ObjectBehavior : MonoBehaviour
         {
             // after player leaves, go back to kinematic
             print("player stopped touching me");
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            // rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocityX = 0;
             isTouchingPlayer = false;
         }
