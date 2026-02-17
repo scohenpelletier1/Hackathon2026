@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour
         if (rb.linearVelocityX < 0)
         {
             animator.SetBool("isLeft", true);
-            animator.Play("PlayerIdleLeft");
+            animator.SetBool("Running", true);
+            animator.Play("PlayerRunLeft");
             isLeft = true;
 
         } else if (rb.linearVelocityX > 0)
