@@ -11,10 +11,26 @@ public class ButtonScript : MonoBehaviour
     public SpriteRenderer effectorSprite;
     public BoxCollider2D effectorCollider;
     public PlatformMover PlatformMover;
-    void onTriggerEnter2D(Collider2D other){
+
+    private Vector3 GetEffectorBottomEdge(){
+        // Get bounds from the sprite renderer or collider to find the bottom edge
+        if(effectorSprite != null){
+            Bounds bounds = effectorSprite.bounds;
+            return new Vector3(bounds.center.x, bounds.min.y, 0);
+        }
+        else if(effectorCollider != null){
+            Bounds bounds = effectorCollider.bounds;
+            return new Vector3(bounds.center.x, bounds.min.y, 0);
+        }
+        // Fallback to object position if no renderer/collider
+        return effector.transform.position;
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
         isPressed = true;
         if(Rotate){
-            effector.transform.Rotate(0, 0, 90);
+            Vector3 bottomEdge = GetEffectorBottomEdge();
+            effector.transform.RotateAround(bottomEdge, Vector3.back, -90);
         }
         else if(doorOpen){
             if(effectorSprite != null){
@@ -33,14 +49,14 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    void onTriggerExit2D(Collider2D other){
+
+    void OnTriggerExit2D(Collider2D other){
         isPressed = false;
-        if(Rotate){
-            effector.transform.Rotate(0, 0, -90);
-        }
-        else if(doorOpen){
-            effectorSprite.color = Color.yellow;
-            effectorCollider.enabled = true;
+        if(doorOpen){
+            if(effectorSprite != null){
+                effectorSprite.color = Color.yellow;
+                effectorCollider.enabled = true;
+            }
         }
         else if (platformMove){
             if(PlatformMover != null){
