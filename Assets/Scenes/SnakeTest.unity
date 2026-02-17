@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48040760e6365cb4193de6bfcb595918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SigilDrawer: {fileID: 0}
+  SigilDrawer: {fileID: 1066804503}
   sigilParent: {fileID: 1066804501}
 --- !u!1 &1066804501
 GameObject:
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiManager: {fileID: 766551588}
-  PrintController: {fileID: 0}
+  PrintController: {fileID: 712490241}
 --- !u!1 &1672602671
 GameObject:
   m_ObjectHideFlags: 0
