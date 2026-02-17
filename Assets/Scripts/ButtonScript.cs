@@ -9,8 +9,9 @@ public class ButtonScript : MonoBehaviour
     public bool platformMove;
     public GameObject effector;
     public SpriteRenderer effectorSprite;
-    public BoxCollider2D effectorCollider;
-    public PlatformMover PlatformMover;
+    public Collider2D effectorCollider;
+    public GameObject PlatformMover;
+    public GameObject Player;
 
     private Vector3 GetEffectorBottomEdge(){
         // Get bounds from the sprite renderer or collider to find the bottom edge
@@ -45,7 +46,7 @@ public class ButtonScript : MonoBehaviour
         }
         else if (platformMove){
             if(PlatformMover != null){
-                PlatformMover.isMoving = true;
+                // PlatformMover.isMoving = true;
             }
         }
     }
@@ -60,9 +61,11 @@ public class ButtonScript : MonoBehaviour
         }
         else if (platformMove){
             if(PlatformMover != null){
-                PlatformMover.isMoving = true;
+                Player.GetComponent<Transform>().position = PlatformMover.transform.position;
             }
+
         }
+
     }
 
 }

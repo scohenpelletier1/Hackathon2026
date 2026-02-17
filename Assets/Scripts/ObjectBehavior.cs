@@ -8,9 +8,8 @@ public class ObjectBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // get the rigidbody, set type (to dynamic so that it can falllllll)
+        // get the rigidbody, set type
         rb = GetComponent<Rigidbody2D>();
-        // rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     // Update is called once per frame
@@ -34,7 +33,6 @@ public class ObjectBehavior : MonoBehaviour
         {
             // if the collider is a player and the object is not a spring
             print("player touched me");
-            // rb.bodyType = RigidbodyType2D.Dynamic;
             isTouchingPlayer = true;
         }
         if (collision.gameObject.CompareTag("Box") && this.CompareTag("Spring") || collision.gameObject.CompareTag("Trash") && this.CompareTag("Spring")){
@@ -49,9 +47,8 @@ public class ObjectBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // after player leaves, go back to kinematic
+            // after player leaves
             print("player stopped touching me");
-            // rb.bodyType = RigidbodyType2D.Kinematic;
             rb.linearVelocityX = 0;
             isTouchingPlayer = false;
         }
