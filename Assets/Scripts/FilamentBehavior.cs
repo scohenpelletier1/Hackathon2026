@@ -19,6 +19,9 @@ public class FilamentBehavior : MonoBehaviour
             // add to number of filaments
             GameManager.Gary.addFilament(1);
 
+            // sound
+            SoundManager.Sherry.MakeFilamentSound();
+
             // destroy the filament
             Destroy(this.gameObject);
 

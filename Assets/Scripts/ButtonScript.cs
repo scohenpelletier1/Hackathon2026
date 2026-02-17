@@ -37,17 +37,21 @@ public class ButtonScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Box") || other.CompareTag("Trash"))
         {
+            // sound
+            SoundManager.Sherry.MakeButtonSound();
+
             isPressed = true;
             if(Rotate){
-                print("1");
                 Vector3 bottomEdge = GetEffectorBottomEdge();
                 effector.transform.RotateAround(bottomEdge, Vector3.back, -90);
             }
             else if(doorOpen){
-                print("2");
                 if(effectorSprite != null){
                     effectorSprite.color = Color.grey;
                     effectorCollider.enabled = false;
+                    
+                    // sound
+                    SoundManager.Sherry.MakeOpenDoorSound();
                 }
             }
             else if(platformToggle){
@@ -78,6 +82,9 @@ public class ButtonScript : MonoBehaviour
                 if(effectorSprite != null){
                     effectorSprite.color = Color.yellow;
                     effectorCollider.enabled = true;
+
+                    // sound
+                    SoundManager.Sherry.MakeCloseDoorSound();
                 }
             }
             else if (platformMove){

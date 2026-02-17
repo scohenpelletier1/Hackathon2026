@@ -114,10 +114,12 @@ public class PlayerController : MonoBehaviour
 
             if (isLeft)
             {
+                SoundManager.Sherry.MakeJumpSound();
                 animator.Play("PlayerJumpLeft");
 
             } else
             {
+                SoundManager.Sherry.MakeJumpSound();
                 animator.Play("PlayerJumpRight");
             }
 
