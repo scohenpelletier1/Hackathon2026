@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/PlayerRunning 2.meta
 guid: 84b66e93eb36e45a2ae215216ff9fcd1
+========
+guid: a7074268650194654bb0b0532e4052fd
+>>>>>>>> origin/LevelDesign2:Assets/Art/PlayerIdle 2.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
