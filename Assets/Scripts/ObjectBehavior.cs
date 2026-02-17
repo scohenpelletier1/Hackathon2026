@@ -37,7 +37,7 @@ public class ObjectBehavior : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Box") && this.CompareTag("Spring") || collision.gameObject.CompareTag("Trash") && this.CompareTag("Spring")){
             GameObject box = collision.gameObject;
-            box.GetComponent<Rigidbody2D>().linearVelocityY = 8;
+            box.GetComponent<Rigidbody2D>().linearVelocityY = 10;
         }
 
 
