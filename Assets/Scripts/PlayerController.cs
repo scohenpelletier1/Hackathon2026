@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {   
-    // instance variables
     private Rigidbody2D rb;
 
     public float speed, jumpForce, groundCheckRadius;
