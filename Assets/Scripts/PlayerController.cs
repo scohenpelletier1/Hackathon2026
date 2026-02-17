@@ -140,8 +140,11 @@ public class PlayerController : MonoBehaviour
     }
     public void Laser(){
         Vector2 direction = isLeft ? Vector2.left : Vector2.right;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 100f, LayerMask.GetMask("Objects"));
+        
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 100f, LayerMask.GetMask("InteractableObjects"));
+        
         if(hit.collider != null){
+            Debug.Log("Hit object: " + hit.collider.gameObject.name + " on layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
             GameObject target = hit.collider.gameObject;
             if (target.CompareTag("Spring")){
                 garry.filament += 2;
@@ -157,6 +160,8 @@ public class PlayerController : MonoBehaviour
             }
             garry.UpdateUI();
             Destroy(target);
+        } else {
+            Debug.Log("Laser hit nothing! Check that objects are on 'InteractableObjects' layer and have Collider2D");
         }
     }
 
