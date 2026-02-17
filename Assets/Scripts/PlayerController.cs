@@ -27,15 +27,6 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
 
-        // issues with sprite rendering, fixed with this so far
-        if (isLeft)
-        {
-            transform.position = new Vector3(transform.position.x, -0.083f, transform.position.x);
-            
-        } else
-        {
-            transform.position = new Vector3(transform.position.x, -0.01510851f, transform.position.x);
-        }
     }
 
     void FixedUpdate() {
