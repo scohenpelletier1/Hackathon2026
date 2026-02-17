@@ -1,5 +1,7 @@
 using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -7,22 +9,33 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public float speed, jumpForce, groundCheckRadius;
-    public bool isGrounded;
+    public bool isGrounded, isLeft;
     public Vector3 groundCheckPosition;
     public LayerMask groundLayers;
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // get the rigidbody
         rb = GetComponent<Rigidbody2D>();
-        
+        isLeft = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         MovePlayer();
+
+        // issues with sprite rendering, fixed with this so far
+        if (isLeft)
+        {
+            transform.position = new Vector3(transform.position.x, -0.083f, transform.position.x);
+            
+        } else
+        {
+            transform.position = new Vector3(transform.position.x, -0.01510851f, transform.position.x);
+        }
     }
 
     void FixedUpdate() {
@@ -49,6 +62,20 @@ public class PlayerController : MonoBehaviour
         // set the velocity
         rb.linearVelocityX = xValue * speed;
 
+        // change direction of idle based on where the player moved
+        if (rb.linearVelocityX < 0)
+        {
+            animator.SetBool("isLeft", true);
+            animator.Play("PlayerLeftIdle");
+            isLeft = true;
+
+        } else if (rb.linearVelocityX > 0)
+        {
+            animator.SetBool("isLeft", false);
+            animator.Play("PlayerRightIdle");
+            isLeft = false;
+        }
+
         // are they jumping?
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -63,6 +90,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded) 
         {
             Gizmos.color = Color.red;
+
         } else
         {
             Gizmos.color = Color.cyan;
@@ -72,9 +100,5 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + groundCheckPosition, groundCheckRadius);
 
     }
-
-
-
-
 
 }
