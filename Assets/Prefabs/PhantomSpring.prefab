@@ -100,6 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868f813ea65cc41f3aaf6d0dcdf451f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nonPhantomObject: {fileID: 0}
+  nonPhantomObject: {fileID: 1850692919918345120, guid: 1d90b60883acc42ea8eb27cfe98b8759, type: 3}
   nonPhantomObjectName: Spring
   mainCamera: {fileID: 0}
