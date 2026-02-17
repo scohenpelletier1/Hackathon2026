@@ -2,7 +2,7 @@ using UnityEngine;
 public class PrintController : MonoBehaviour
 {
     [SerializeField] private SigilDrawer sigilDrawer;
-    public GameObject sigilParent;
+    [SerializeField] private GameObject sigilParent;
     public GameObject printPrefab;
     public float gridSize = 1f;
     public float moveInterval = 0.2f; // seconds between moves
@@ -11,6 +11,7 @@ public class PrintController : MonoBehaviour
     private Vector2 direction = Vector2.right;
     private Vector3 prefabPosition;
     private float moveTimer;
+    private Vector2 offset;
     
     void Update()
     {
@@ -23,6 +24,10 @@ public class PrintController : MonoBehaviour
             Move();
             moveLock = false;
         }
+    }
+    public void CalculateOffset(){
+        offset = (Vector2) transform.position;
+        Debug.Log(offset);
     }
     
     void HandleInput()
@@ -51,18 +56,16 @@ public class PrintController : MonoBehaviour
     {
         prefabPosition = transform.position;
         transform.position += (Vector3)(direction * gridSize);
-        Vector2 prefabGridPosition = new Vector2(prefabPosition.x-sigilParent.transform.position.x, prefabPosition.y-sigilParent.transform.position.y);
+        Vector2 prefabGridPosition = new Vector2(prefabPosition.x-offset.x, prefabPosition.y-offset.y);
         sigilDrawer.RecordCell(prefabGridPosition);
         Instantiate(printPrefab, prefabPosition, Quaternion.identity);
     }
     void OnTriggerEnter2D(Collider2D other){
-        isDrawing = false;
         sigilDrawer.CompareDrawing();
-        resetPrinterHead();
     }
     public void resetPrinterHead(){
-        transform.position = sigilParent.transform.position;
         isDrawing = false;
+        transform.position = sigilParent.transform.position;
         direction = Vector2.right;
     }
 }
