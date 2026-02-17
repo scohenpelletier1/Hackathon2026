@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 groundCheckPosition;
     public LayerMask groundLayers;
     public Animator animator;
+    public KeyCode keyToDetect = KeyCode.Q // The key you want to detect
+    public float requiredHoldTime = 2.0f; // The required hold duration in seconds
+    private float holdTimer = 0.0f;
+    private bool heldLongEnough = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +32,25 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Gary.currentState == GameState.Playing)
         {
             MovePlayer();
+        }
+        // Check if the key is currently held down
+        if (Input.GetKey(keyToDetect))
+        {
+            // If it is, increment the timer by the time passed since the last frame
+            holdTimer += Time.deltaTime;
+
+            // Check if the timer has reached the required time and the action hasn't already triggered
+            if (holdTimer >= requiredHoldTime && !heldLongEnough)
+            {
+                Debug.Log("Key held for " + requiredHoldTime + " seconds!");
+                Laser()
+            }
+        }
+        else
+        {
+            // If the key is released, reset the timer and the flag
+            holdTimer = 0.0f;
+            heldLongEnough = false;
         }
 
     }
@@ -112,6 +135,26 @@ public class PlayerController : MonoBehaviour
         // draw the circle
         Gizmos.DrawWireSphere(transform.position + groundCheckPosition, groundCheckRadius);
 
+    }
+    public void Laser(){
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 100f, LayerMask.GetMask("Objects"));
+        if(hit.collider != null){
+            gameObject target = hit.collider.gameObject.name
+            if GameObject.CompareTag("Spring"){
+                garry.filament += 2;
+            }
+            if GameObject.CompareTag("Grapple"){
+                garry.filament += 4;
+            }
+            if GameObject.CompareTag("Box"){
+                garry.filament += 3;
+            }
+            if GameObject.CompareTag("Trash"){
+                garry.filament += 1;
+            }
+            garry.UpdateUI();
+            Destroy(target);
+        }
     }
 
 }
