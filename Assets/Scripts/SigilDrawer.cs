@@ -17,6 +17,7 @@ public class SigilDrawer: MonoBehaviour
     bool[,] grappleGrid = new bool[gridWidth, gridHeight];
     public UiManager UiManager;
     public PrintController PrintController;
+    public GameManager garry;
     void Start(){
         // game manager turns movement off
         GameManager.Gary.currentState = GameState.SnakeGame;
@@ -109,24 +110,51 @@ public class SigilDrawer: MonoBehaviour
     }
     private void CompleteSigil(int objectNumber){
         Debug.Log("objectNumber: " + objectNumber);
+        StopPrinting();
+        UiManager.closePrinter();
         if(objectNumber == 1){
             // create box
-            GameObject box = Instantiate(phantomBox);
+            if(garry.filament >= 3){
+                GameObject box = Instantiate(phantomBox);
+                garry.filament -= 3;
+                garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
 
         }
         else if(objectNumber == 2){
+            if(garry.filament >= 2){
             GameObject spring = Instantiate(phantomSpring);
+            garry.filament -= 2;
+            garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
         }
         else if(objectNumber == 3){
+            if(garry.filament >= 4){
             GameObject grapple = Instantiate(phantomGrapple);
+            garry.filament -= 4;
+            garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
         }
         else{
             // create trash
+            if(garry.filament >= 1){
             GameObject trash = Instantiate(phantomTrash);
+            garry.filament -= 1;
+            garry.UpdateUI();
+            }
+            else{
+                garry.showErrorMessage();
+            }
         }
-
-        StopPrinting();
-        UiManager.closePrinter();
 
         // allow player to move again
         GameManager.Gary.currentState = GameState.Playing;

@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int filament;
     public Image filamentImage;
     public Canvas canvas;
+    public GameObject errorMessage;
 
     void Awake() {
         // check for the singleton
@@ -53,17 +55,34 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void UpdateUI() {
+    public void UpdateUI() {
         // update all UI values
-        
+        int filamentImageCount = GameObject.FindGameObjectsWithTag("FilamentImage").Length;
         // for filament
-        for (int i = 0; i < filament; i++)
-        {
-            filamentImage = GameObject.Instantiate(filamentImage);
-            filamentImage.transform.SetParent(canvas.transform, false);
-            filamentImage.rectTransform.anchoredPosition = new Vector3(-370 + (30 * i), 190, 0);
+        if(filamentImageCount < filament){
+            for (int i = 1; i < filament; i++)
+            {
+                filamentImage = GameObject.Instantiate(filamentImage);
+                filamentImage.transform.SetParent(canvas.transform, false);
+                filamentImage.rectTransform.anchoredPosition = new Vector3(-370 + (30 * i), 190, 0);
+            }
         }
-        
+        else{
+            for (int i = filamentImageCount; i > filamentImageCount - (filamentImageCount - filament); i--)
+            {
+                Debug.Log(filamentImageCount-filament);
+                Destroy(GameObject.FindGameObjectsWithTag("FilamentImage")[i-1]);
+            }
+        }
+    }
+    public void showErrorMessage(){
+        StartCoroutine(ShowErrorCoroutine());
+    }
+
+    private IEnumerator ShowErrorCoroutine(){
+        errorMessage.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        errorMessage.SetActive(false);
     }
     
 }
