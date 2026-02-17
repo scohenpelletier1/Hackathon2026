@@ -56,14 +56,20 @@ public class PlayerController : MonoBehaviour
         if (rb.linearVelocityX < 0)
         {
             animator.SetBool("isLeft", true);
-            animator.Play("PlayerLeftIdle");
+            animator.Play("PlayerIdleLeft");
             isLeft = true;
 
         } else if (rb.linearVelocityX > 0)
         {
             animator.SetBool("isLeft", false);
-            animator.Play("PlayerRightIdle");
+            animator.SetBool("Running", true);
+            animator.Play("PlayerRunRight");
             isLeft = false;
+
+        } else if (rb.linearVelocityX == 0)
+        {
+            animator.SetBool("Running", false);
+
         }
 
         // are they jumping?

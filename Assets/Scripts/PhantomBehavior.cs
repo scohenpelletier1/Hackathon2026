@@ -35,7 +35,7 @@ public class PhantomBehavior : MonoBehaviour
             nonPhantomObject.name = nonPhantomObjectName;
 
             // delete self
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
     }

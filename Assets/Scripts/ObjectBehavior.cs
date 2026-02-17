@@ -8,9 +8,9 @@ public class ObjectBehavior : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // get the rigidbody, set type
+        // get the rigidbody, set type (to dynamic so that it can falllllll)
         rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     // Update is called once per frame
