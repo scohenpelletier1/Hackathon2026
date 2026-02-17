@@ -39,6 +39,29 @@ public class SigilDrawer: MonoBehaviour
                 springGrid[i + 7, e] = springData[i, e];
             }
         }
+        //grapple grid initialization (GOD WHEN WILL IT END?)
+        bool[,] grappleData = new bool[,] {
+            {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, true, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, true, true, true, true},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
+            {false, false, false, false, false, false, false, true, true, true, true, true, true, true, true},
+            {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, true, false, false, false, false, false, false, false},
+            {true, true, true, true, true, false, false, true, false, false, false, false, false, false, false},
+            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
+            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
+            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
+            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
+            {true, false, false, false, true, false, false, true, false, false, false, false, false, false, false},
+            {true, true, true, true, true, true, true, true, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
+        };
     }
     //When the time comes, add the ability to set a starting location for the head
     public void StartPrinting(){
