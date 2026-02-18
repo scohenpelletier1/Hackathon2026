@@ -22,6 +22,9 @@ public class FilamentBehavior : MonoBehaviour
             // sound
             SoundManager.Sherry.MakeFilamentSound();
 
+            // destroy the filament
+            Destroy(this.gameObject);
+
             // hide filament
             this.gameObject.SetActive(false);
         }
