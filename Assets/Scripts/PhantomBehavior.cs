@@ -34,6 +34,9 @@ public class PhantomBehavior : MonoBehaviour
             nonPhantomObject.transform.position = spawnPosition;
             nonPhantomObject.name = nonPhantomObjectName;
 
+            // sound
+            SoundManager.Sherry.MakePlaceObjectSound();
+
             // delete self
             Destroy(this.gameObject);
         }

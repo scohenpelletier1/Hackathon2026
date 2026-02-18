@@ -25,6 +25,7 @@ public class ObjectBehavior : MonoBehaviour
         {
             print("Hiiiiiiiiiiiiiii");
             GameObject player = collision.gameObject;
+            SoundManager.Sherry.MakeSpringSound();
 
             // if the collider is a player, the object IS a spring, and the player is standing on top of the spring
             player.GetComponent<Rigidbody2D>().linearVelocityY = player.GetComponent<PlayerController>().jumpForce * 2;
@@ -37,9 +38,9 @@ public class ObjectBehavior : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Box") && this.CompareTag("Spring") || collision.gameObject.CompareTag("Trash") && this.CompareTag("Spring")){
             GameObject box = collision.gameObject;
-            box.GetComponent<Rigidbody2D>().linearVelocityY = 8;
+            box.GetComponent<Rigidbody2D>().linearVelocityY = 10;
+            SoundManager.Sherry.MakeSpringSound();
         }
-
 
     }
 

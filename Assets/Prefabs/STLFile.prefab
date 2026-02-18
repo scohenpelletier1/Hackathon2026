@@ -150,4 +150,4 @@ MonoBehaviour:
   isBox: 0
   isSpring: 0
   isGrapple: 0
-  garry: {fileID: 0}
+  garry: {fileID: 6981520637861346838, guid: aec3f910bc9a44b39a47b6675b8fb48f, type: 3}

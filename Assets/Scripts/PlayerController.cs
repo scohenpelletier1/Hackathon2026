@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             MovePlayer();
         }
+
         // Check if the key is currently held down
         if (Input.GetKey(keyToDetect))
         {
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
                 heldLongEnough = true;
                 Laser();
             }
+            
         }
         else
         {
@@ -113,10 +115,12 @@ public class PlayerController : MonoBehaviour
 
             if (isLeft)
             {
+                SoundManager.Sherry.MakeJumpSound();
                 animator.Play("PlayerJumpLeft");
 
             } else
             {
+                SoundManager.Sherry.MakeJumpSound();
                 animator.Play("PlayerJumpRight");
             }
 

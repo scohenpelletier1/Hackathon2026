@@ -2,20 +2,25 @@ using UnityEngine;
 
 public class STLScript: MonoBehaviour
 {
-    public bool isBox = false;
-    public bool isSpring = false;
-    public bool isGrapple = false;
-    public GameManager garry;
+    public bool isBox, isSpring, isGrapple;
+
     void OnTriggerEnter2D(Collider2D other){
-        if(isBox){
-            garry.foundBox = true;
+        if (other.CompareTag("Player"))
+        {            
+            if(isBox){
+                GameManager.Gary.GetComponent<GameManager>().foundBox = true;
+            }
+            else if(isSpring){
+                GameManager.Gary.GetComponent<GameManager>().foundSpring = true;
+            }
+            else if(isGrapple){
+                GameManager.Gary.GetComponent<GameManager>().foundGrapple = true;
+            }
+
+            gameObject.SetActive(false);
+            
         }
-        else if(isSpring){
-            garry.foundSpring = true;
-        }
-        else if(isGrapple){
-            garry.foundGrapple = true;
-        }
-        gameObject.SetActive(false);
+
     }
+
 }
