@@ -25,6 +25,8 @@ public class FilamentBehavior : MonoBehaviour
             // destroy the filament
             Destroy(this.gameObject);
 
+            // hide filament
+            this.gameObject.SetActive(false);
         }
         
     }

@@ -1,4 +1,3 @@
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 public class SigilDrawer: MonoBehaviour
@@ -116,40 +115,65 @@ public class SigilDrawer: MonoBehaviour
             // create box
             if(garry.filament >= 3){
                 GameObject box = Instantiate(phantomBox);
-                garry.filament -= 3;
+                garry.substractFilament(3);
+
+                // sound
+                SoundManager.Sherry.MakeSuccessSound();
             }
             else{
                 garry.showErrorMessage();
+
+                // sound
+                SoundManager.Sherry.MakeFailureSound();
             }
 
         }
         else if(objectNumber == 2){
             if(garry.filament >= 2){
-            GameObject spring = Instantiate(phantomSpring);
-            garry.filament -= 2;
+                GameObject spring = Instantiate(phantomSpring);
+                garry.substractFilament(2);
+
+                // sound
+                SoundManager.Sherry.MakeSuccessSound();
             }
             else{
                 garry.showErrorMessage();
+
+                // sound
+                SoundManager.Sherry.MakeFailureSound();
             }
         }
         else if(objectNumber == 3){
             if(garry.filament >= 4){
-            GameObject grapple = Instantiate(phantomGrapple);
-            garry.filament -= 4;
+                GameObject grapple = Instantiate(phantomGrapple);
+                garry.substractFilament(4);
+
+                // sound
+                SoundManager.Sherry.MakeSuccessSound();
             }
             else{
                 garry.showErrorMessage();
+
+                // sound
+                SoundManager.Sherry.MakeFailureSound();
             }
         }
         else{
             // create trash
             if(garry.filament >= 1){
-            GameObject trash = Instantiate(phantomTrash);
-            garry.filament -= 1;
+                GameObject trash = Instantiate(phantomTrash);
+                garry.substractFilament(1);
+
+                // sound
+                SoundManager.Sherry.MakeFailureSound();
             }
             else{
                 garry.showErrorMessage();
+
+                // sound
+                SoundManager.Sherry.MakeFailureSound();
             }
+
             garry.UpdateUI();
         }
 

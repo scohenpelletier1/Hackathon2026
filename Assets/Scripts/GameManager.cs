@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,10 +55,18 @@ public class GameManager : MonoBehaviour
     }
 
     public void addFilament(int addAmount) {
-        // update score amount
+        // update filament
         filament += addAmount;
         UpdateUI();
 
+    }
+
+    public void substractFilament(int lossAmount)
+    {
+        // update filament
+        filament -= lossAmount;
+        UpdateUI();
+        
     }
 
     public void UpdateUI() {
@@ -72,7 +79,7 @@ public class GameManager : MonoBehaviour
             {
                 filamentImage = GameObject.Instantiate(filamentImage);
                 filamentImage.transform.SetParent(canvas.transform, false);
-                filamentImage.rectTransform.anchoredPosition = new Vector3(-370 + (30 * i), 190, 0);
+                filamentImage.rectTransform.anchoredPosition = new Vector3(75 + (75 * i), -55, 0);
             }
         }
         else{
