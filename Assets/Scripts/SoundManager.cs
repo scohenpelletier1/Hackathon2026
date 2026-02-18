@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource localAudio;
 
     public static SoundManager Sherry;
-    public AudioClip springSound, jumpSound, placeObjectSound, buttonSound, openDoorSound, closeDoorSound, filamentSound;
+    public AudioClip springSound, jumpSound, placeObjectSound, buttonSound, openDoorSound, closeDoorSound, filamentSound, failureSound, successSound;
     public AudioSource backgroundMusic;
 
     void Awake() {
@@ -63,6 +63,16 @@ public class SoundManager : MonoBehaviour
     public void MakeFilamentSound()
     {
         localAudio.PlayOneShot(filamentSound);
+    }
+
+    public void MakeFailureSound()
+    {
+        localAudio.PlayOneShot(failureSound);
+    }
+
+    public void MakeSuccessSound()
+    {
+        localAudio.PlayOneShot(successSound);
     }
 
 }
